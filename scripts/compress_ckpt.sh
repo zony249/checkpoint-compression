@@ -19,3 +19,7 @@ export HF_HOME=$SCRATCH
 accelerate launch \
     --config_file=accel_configs/fsdp.yaml \
     compress_ckpt.py \
+        --base_model=EleutherAI/pythia-410M \
+        --checkpoints_dir=/home/zonglin1/scratch/runs/pythia-pile \
+        --output_compression=$SCRATCH/runs/pythia-pile-compress \
+        --output_recon=$SCRATCH/runs/pythia-pile-recon \

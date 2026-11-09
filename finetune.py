@@ -42,7 +42,7 @@ if __name__ == "__main__":
     parser.add_argument("--task", type=str, choices=["gsm", "pile"]) 
     parser.add_argument("--output_dir", type=str, default="runs/")
     parser.add_argument("--use_lora", action="store_true")
-    parser.add_argument("--eval_every_steps", default=1000)
+    parser.add_argument("--eval_every_steps",type=int, default=1000)
     parser.add_argument("--lr", type=float, default=1e-5)
     parser.add_argument("--beta1", type=float, default=0.9)
     parser.add_argument("--beta2", type=float, default=0.999)
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         greater_is_better=False,
         resume_from_checkpoint=None, 
         remove_unused_columns=False,
-        dataloader_num_workers=8, 
+        dataloader_num_workers=4, 
         accelerator_config={"dispatch_batches": False, "split_batches": False}
     )
 

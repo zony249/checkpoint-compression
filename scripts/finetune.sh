@@ -1,11 +1,11 @@
 #!/bin/bash 
 #SBATCH --account=aip-lilimou        
-#SBATCH --time=0-03:00
+#SBATCH --time=2-12:00
 #SBATCH --nodes=1                     
-#SBATCH --cpus-per-task=4              
+#SBATCH --cpus-per-task=6              
 #SBATCH --gpus-per-node=4
 #SBATCH --mem=96G                      
-#SBATCH --job-name=llama-finetune       
+#SBATCH --job-name=pythia-pile       
 #SBATCH --output=logs/slurm-%j.out          
 
 
@@ -27,3 +27,4 @@ accelerate launch \
         --beta1=0.9 \
         --beta2=0.95 \
         --weight_decay=0.1 \
+        --eval_every_steps=1000 \

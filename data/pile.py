@@ -4,13 +4,12 @@ from typing import List, Dict, Tuple
 
 import torch 
 from torch import nn 
-from torch.utils.data import Dataset
+from datasets import Dataset, load_dataset
 from datasets.iterable_dataset import IterableDataset
 from tqdm import tqdm
 import pyarrow.dataset as pds
 from pyarrow import CacheOptions
 
-from datasets import load_dataset
 
 from .abstract import AbstractDataset 
 
@@ -36,7 +35,8 @@ class Pile(AbstractDataset):
             if split == "train": 
                 return ds_temp["train"].skip(1000)
             else: 
-                return ds_temp["train"].take(1000)
+                stream_ds = ds_temp["train"].take(1000)
+                return Dataset.from_generator(lambda: stream_ds)
         else:  
             ds_temp = self.dataset
             return ds_temp[split]
